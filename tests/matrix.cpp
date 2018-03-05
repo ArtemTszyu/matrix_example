@@ -62,13 +62,13 @@ TEST_CASE("matrix+")
 TEST_CASE("matrix-")
 {
     std::string input1{ "3, 3\n"
-                        "1 1 1\n"
-                        "1 1 1\n"
-                        "1 1 1" };
-    std::string input2{ "3, 3\n"
                         "5 5 5\n"
                         "5 5 5\n"
                         "5 5 5" };
+    std::string input2{ "3, 3\n"
+                        "1 1 1\n"
+                        "1 1 1\n"
+                        "1 1 1" };
     std::string output{ "3, 3\n"
                         "4 4 4\n"
                         "4 4 4\n"
@@ -81,7 +81,7 @@ TEST_CASE("matrix-")
     matrix1.read(istream1);
     matrix2.read(istream2);
 
-    result = matrix2 - matrix1;
+    result = matrix1 - matrix2;
 
     std::ostringstream ostream;
     result.write(ostream);
