@@ -1,5 +1,5 @@
 #include "matrix.hpp"
-
+template <typename T>
 matrix_t::matrix_t()
     : elements_{ nullptr }
     , rows_{ 0 }
@@ -7,11 +7,11 @@ matrix_t::matrix_t()
 {
 }
 
-matrix_t::matrix_t(matrix_t const& other)
+matrix_t<T>::matrix_t(matrix_t<T> const& other)
 {
     this->rows_ = other.rows_;
     this->collumns_ = other.collumns_;
-    this->elements_ = new float*[this->rows_];
+    this->elements_ = new T*[rows_];
     for (std::size_t i = 0; i < this->rows_; i++)
     {
         elements_[i] = new float[this->collumns_];
