@@ -1,12 +1,13 @@
 #include "matrix.hpp"
 template <typename T>
 matrix_t::matrix_t()
-    : elements_{ nullptr }
-    , rows_{ 0 }
-    , collumns_{ 0 }
 {
+    elements_ = nullptr;
+    rows_ = 0;
+    collumns_ = 0; 
 }
 
+template <typename T>
 matrix_t<T>::matrix_t(matrix_t<T> const& other)
 {
     this->rows_ = other.rows_;
@@ -14,7 +15,7 @@ matrix_t<T>::matrix_t(matrix_t<T> const& other)
     this->elements_ = new T*[rows_];
     for (std::size_t i = 0; i < this->rows_; i++)
     {
-        elements_[i] = new float[this->collumns_];
+        elements_[i] = new T[this->collumns_];
         for (std::size_t j = 0; j < this->collumns_; j++)
         {
             this->elements_[i][j] = other.elements_[i][j];
@@ -22,7 +23,8 @@ matrix_t<T>::matrix_t(matrix_t<T> const& other)
     }
 }
 
-matrix_t& matrix_t::operator=(matrix_t const& other)
+template <typename T>
+matrix_t <T> & matrix_t <T> ::operator=(matrix_t const& other)
 {
     for (unsigned int i = 0; i < this->rows_; i++)
     {
@@ -31,10 +33,10 @@ matrix_t& matrix_t::operator=(matrix_t const& other)
     delete[] this->elements_;
     this->rows_ = other.rows_;
     this->collumns_ = other.collumns_;
-    this->elements_ = new float*[rows_];
+    this->elements_ = new T*[rows_];
     for (unsigned int i = 0; i < this->rows_; i++)
     {
-        this->elements_[i] = new float[this->collumns_];
+        this->elements_[i] = new T[this->collumns_];
         for (unsigned int j = 0; j < this->collumns_; j++)
         {
             this->elements_[i][j] = other.elements_[i][j];
@@ -43,7 +45,8 @@ matrix_t& matrix_t::operator=(matrix_t const& other)
     return *this;
 }
 
-matrix_t::~matrix_t()
+template <typename T>
+matrix_t <T> ::~matrix_t()
 {
     for (unsigned int i = 0; i < this->rows_; i++)
     {
@@ -51,25 +54,28 @@ matrix_t::~matrix_t()
     }
 }
 
-std::size_t matrix_t::rows() const
+template <typename T>
+std::size_t matrix_t <T> ::rows() const
 {
     return rows_;
 }
 
-std::size_t matrix_t::collumns() const
+template <typename T>
+std::size_t matrix_t <T> ::collumns() const
 {
     return collumns_;
 }
 
-matrix_t matrix_t::operator+(matrix_t const& other) const
+template <typename T>
+matrix_t <T> matrix_t <T> ::operator+(matrix_t const& other) const
 {
     matrix_t result;
     if (this->rows_ == other.rows_ && this->collumns_ == other.collumns_)
     {
-        result.elements_ = new float*[this->rows_];
+        result.elements_ = new T*[this->rows_];
         for (std::size_t i = 0; i < this->rows_; i++)
         {
-            result.elements_[i] = new float[this->collumns_];
+            result.elements_[i] = new T[this->collumns_];
         }
         result.rows_ = this->rows_;
         result.collumns_ = this->collumns_;
@@ -90,15 +96,16 @@ matrix_t matrix_t::operator+(matrix_t const& other) const
     return result;
 }
 
-matrix_t matrix_t::operator-(matrix_t const& other) const
+template <typename T>
+matrix_t <T> matrix_t <T> ::operator-(matrix_t const& other) const
 {
     matrix_t result;
     if (this->rows_ == other.rows_ && this->collumns_ == other.collumns_)
     {
-        result.elements_ = new float*[this->rows_];
+        result.elements_ = new T*[this->rows_];
         for (std::size_t i = 0; i < this->rows_; i++)
         {
-            result.elements_[i] = new float[this->collumns_];
+            result.elements_[i] = new T[this->collumns_];
         }
         result.rows_ = this->rows_;
         result.collumns_ = this->collumns_;
@@ -118,17 +125,18 @@ matrix_t matrix_t::operator-(matrix_t const& other) const
     return result;
 }
 
-matrix_t matrix_t::operator*(matrix_t const& other) const
+template <typename T>
+matrix_t <T> matrix_t <T> ::operator*(matrix_t const& other) const
 {
     matrix_t result;
     if (this->collumns_ == other.rows_)
     {
         result.rows_ = this->rows_;
         result.collumns_ = other.collumns_;
-        result.elements_ = new float*[this->rows_];
+        result.elements_ = new T*[this->rows_];
         for (std::size_t i = 0; i < this->rows_; ++i)
         {
-            result.elements_[i] = new float[other.collumns_];
+            result.elements_[i] = new T [other.collumns_];
         }
         for (std::size_t i = 0; i < this->rows_; i++)
         {
@@ -151,7 +159,8 @@ matrix_t matrix_t::operator*(matrix_t const& other) const
     return result;
 }
 
-matrix_t& matrix_t::operator-=(matrix_t const& other)
+template <typename T>
+matrix_t <T> & matrix_t <T> ::operator-=(matrix_t const& other)
 {
     if (this->rows_ == other.rows_ && this->collumns_ == other.collumns_)
     {
@@ -171,7 +180,8 @@ matrix_t& matrix_t::operator-=(matrix_t const& other)
     return *this;
 }
 
-matrix_t& matrix_t::operator+=(matrix_t const& other)
+template <typename T>
+matrix_t <T> & matrix_t <T> ::operator+=(matrix_t const& other)
 {
 
     if (this->rows_ == other.rows_ && this->collumns_ == other.collumns_)
@@ -192,17 +202,18 @@ matrix_t& matrix_t::operator+=(matrix_t const& other)
     return *this;
 }
 
-matrix_t& matrix_t::operator*=(matrix_t const& other)
+template <typename T>
+matrix_t <T> & matrix_t<T>::operator*=(matrix_t const& other)
 {
     if (this->collumns_ == other.rows_)
     {
         matrix_t result;
         result.rows_ = this->rows_;
         result.collumns_ = other.collumns_;
-        result.elements_ = new float*[this->rows_];
+        result.elements_ = new T*[this->rows_];
         for (std::size_t i = 0; i < this->rows_; ++i)
         {
-            result.elements_[i] = new float[other.collumns_];
+            result.elements_[i] = new T[other.collumns_];
         }
         for (std::size_t i = 0; i < this->rows_; i++)
         {
@@ -226,7 +237,8 @@ matrix_t& matrix_t::operator*=(matrix_t const& other)
     return *this;
 }
 
-std::istream& matrix_t::read(std::istream& stream)
+template <typename T>
+std::istream& matrix_t <T> ::read(std::istream& stream)
 {
     std::size_t rows;
     std::size_t collumns;
@@ -235,10 +247,10 @@ std::istream& matrix_t::read(std::istream& stream)
     bool success = true;
     if (stream >> rows && stream >> symbol && symbol == ',' && stream >> collumns)
     {
-        float** elements = new float*[rows];
+        T** elements = new T*[rows];
         for (std::size_t i = 0; success && i < rows; ++i)
         {
-            elements[i] = new float[collumns];
+            elements[i] = new T[collumns];
             for (std::size_t j = 0; j < collumns; ++j)
             {
                 if (!(stream >> elements[i][j]))
@@ -283,7 +295,8 @@ std::istream& matrix_t::read(std::istream& stream)
     return stream;
 }
 
-std::ostream& matrix_t::write(std::ostream& stream) const
+template <typename T>
+std::ostream& matrix_t <T> ::write(std::ostream& stream) const
 {
     stream << rows_ << ", " << collumns_;
     for (std::size_t i = 0; i < rows_; ++i)
