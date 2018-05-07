@@ -5,7 +5,7 @@
 
 TEST_CASE("creating matrix")
 {
-    matrix_t matrix;
+    matrix_t <int> matrix;
     REQUIRE(matrix.rows() == 0);
     REQUIRE(matrix.collumns() == 0);
 }
@@ -16,7 +16,7 @@ TEST_CASE("reading matrix")
                        "1 1 1\n"
                        "2 2 2\n"
                        "3 3 3" };
-    matrix_t matrix;
+    matrix_t <int> matrix;
     std::istringstream istream{ input };
 
     REQUIRE(matrix.read(istream));
@@ -43,7 +43,7 @@ TEST_CASE("matrix+")
                         "3 3 3\n"
                         "3 3 3\n"
                         "3 3 3" };
-    matrix_t matrix1, matrix2, result;
+    matrix_t <int> matrix1, matrix2, result;
 
     std::istringstream istream1{ input1 };
     std::istringstream istream2{ input2 };
@@ -73,7 +73,7 @@ TEST_CASE("matrix-")
                         "4 4 4\n"
                         "4 4 4\n"
                         "4 4 4" };
-    matrix_t matrix1, matrix2, result;
+    matrix_t <int> matrix1, matrix2, result;
 
     std::istringstream istream1{ input1 };
     std::istringstream istream2{ input2 };
@@ -103,7 +103,7 @@ TEST_CASE("matrix*")
                         "6 6 6\n"
                         "6 6 6\n"
                         "6 6 6" };
-    matrix_t matrix1, matrix2, result;
+    matrix_t <int> matrix1, matrix2, result;
 
     std::istringstream istream1{ input1 };
     std::istringstream istream2{ input2 };
@@ -132,7 +132,7 @@ TEST_CASE("matrix+=")
                         "3 3 3\n"
                         "3 3 3\n"
                         "3 3 3" };
-    matrix_t matrix1, matrix2;
+    matrix_t <int> matrix1, matrix2;
 
     std::istringstream istream1{ input1 };
     std::istringstream istream2{ input2 };
@@ -161,7 +161,7 @@ TEST_CASE("matrix-=")
                         "4 4 4\n"
                         "4 4 4\n"
                         "4 4 4" };
-    matrix_t matrix1, matrix2;
+    matrix_t <int> matrix1, matrix2;
 
     std::istringstream istream1{ input1 };
     std::istringstream istream2{ input2 };
@@ -190,7 +190,7 @@ TEST_CASE("matrix*=")
                         "6 6 6\n"
                         "6 6 6\n"
                         "6 6 6" };
-    matrix_t matrix1, matrix2;
+    matrix_t <int> matrix1, matrix2;
 
     std::istringstream istream1{ input1 };
     std::istringstream istream2{ input2 };
